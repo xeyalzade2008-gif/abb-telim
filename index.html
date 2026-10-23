@@ -1,0 +1,1414 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABB | Bank saytı — Təlim maketi</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #24334b;
+  background: #f5f8fc;
+}
+.topbar {
+  background: #f0f3f7;
+  padding: 12px 8%;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+}
+header {
+  background: white;
+  padding: 20px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo {
+  color: #0875c9;
+  font-size: 32px;
+  font-weight: bold;
+}
+nav { display: flex; gap: 22px; flex-wrap: wrap; }
+nav a {
+  text-decoration: none;
+  color: #25354c;
+  font-weight: 600;
+}
+nav a:hover { color: #0875c9; }
+.hero {
+  background: linear-gradient(110deg, #0756a5, #16a4e8);
+  color: white;
+  padding: 75px 8%;
+}
+.hero h1 { font-size: 42px; max-width: 620px; }
+.hero p { max-width: 540px; line-height: 1.7; }
+button, .btn {
+  background: #0875c9;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 13px 23px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.hero .btn { background: white; color: #0756a5; }
+section { padding: 45px 8%; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px #16375a12;
+}
+.card h3 { color: #0756a5; }
+footer {
+  background: #172b4d;
+  color: white;
+  padding: 28px 8%;
+}
+.notice {
+  background: #fff3d7;
+  padding: 12px 8%;
+  font-size: 13px;
+}
+</style>
+
+<style>
+/* Ümumi görünüş */
+body {
+  background: #f4f7fb;
+  line-height: 1.6;
+}
+
+section {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  scroll-margin-top: 25px;
+}
+
+section h2 {
+  color: #17365c;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Kart dizaynları */
+.card, .bank-product, .branch-card, .faq-item {
+  border-radius: 16px;
+  border: 1px solid #e5ecf5;
+  box-shadow: 0 6px 22px rgba(17, 57, 100, 0.06);
+}
+
+/* Düymələr */
+button, .btn {
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform .2s, box-shadow .2s;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(8, 117, 201, 0.18);
+}
+
+/* Naviqasiya */
+nav a {
+  transition: color .2s;
+}
+
+nav a:hover {
+  color: #0875c9;
+}
+
+/* Mobil ekranlar */
+@media (max-width: 768px) {
+  section {
+    padding: 30px 5%;
+  }
+
+  section h2 {
+    font-size: 25px;
+  }
+
+  .bank-card-grid, .branch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animasiya həssaslığı */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<div class="notice">
+  TƏLİM MAKETİ — Bu səhifə ABB-nin rəsmi saytı deyil.
+</div>
+
+<div class="topbar">
+  <span>Fərdi müştərilər | Biznes müştəriləri</span>
+  <span>AZ | EN | RU</span>
+</div>
+
+<header>
+  
+<div class="brand-area">
+  <div class="brand-area">
+  <img src="abb-logo.png"
+       alt="ABB loqosu" onerror="this.style.display='none';this.insertAdjacentText('afterend','Bank interfeysi demo')"
+       class="bank-logo">
+</div>
+</div>
+
+  <nav>
+  <a href="#kartlar">Kartlar</a>
+  <a href="#kreditler">Kreditlər</a>
+  <a href="#emanetler">Əmanətlər</a>
+  <a href="#valyuta">Valyuta</a>
+  <a href="#kredit-kalkulyator">Kredit kalkulyatoru</a>
+  <a href="#emanet-kalkulyator">Əmanət kalkulyatoru</a>
+</nav>
+  <button type="button" id="themeToggle" onclick="toggleTheme()" aria-pressed="false">🌙 Qaranlıq rejim</button>
+  <a class="btn" href="#xidmetler">Xidmətlər</a>
+</header>
+
+<div class="search-area">
+  <input
+    type="search"
+    id="siteSearch"
+    placeholder="Saytda axtar..."
+    aria-label="Saytda axtarış"
+  >
+  <button onclick="searchSite()">Axtar</button>
+  <p id="searchMessage" aria-live="polite"></p>
+</div>
+
+<style>
+.search-area {
+  background: white;
+  padding: 18px 8%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.search-area input {
+  flex: 1;
+  min-width: 180px;
+  padding: 13px;
+  border: 1px solid #d4dfeb;
+  border-radius: 8px;
+}
+.search-area button { width: auto; }
+.search-area p { width: 100%; margin: 0; }
+</style>
+
+<script>
+function searchSite() {
+  const query = document.getElementById("siteSearch")
+    .value.trim().toLocaleLowerCase("az");
+
+  const pages = [
+    { words: ["kart", "debet"], id: "kartlar" },
+    { words: ["kredit", "borc"], id: "kredit-kalkulyator" },
+    { words: ["əmanət", "emanet"], id: "emanet-kalkulyator" },
+    { words: ["valyuta", "dollar", "avro"], id: "valyuta" }
+  ];
+
+  const found = pages.find(page =>
+    page.words.some(word => query.includes(word))
+  );
+
+  const message = document.getElementById("searchMessage");
+
+  if (!query) {
+    message.textContent = t("Axtarış sözü daxil edin.","Enter a search term.","Введите поисковый запрос.");
+  } else if (found) {
+    message.textContent = "";
+    document.getElementById(found.id)
+      .scrollIntoView({ behavior: "smooth" });
+  } else {
+    message.textContent = t("Uyğun bölmə tapılmadı.","No matching section found.","Подходящий раздел не найден.");
+  }
+}
+
+document.getElementById("siteSearch")
+  .addEventListener("keydown", function(event) {
+    if (event.key === "Enter") searchSite();
+  });
+</script>
+
+<div class="hero-slider">
+  <div class="slide active">
+    <h1>Bank xidmətləri bir ünvanda</h1>
+    <p>Kartlar, kreditlər və gündəlik maliyyə xidmətləri.</p>
+    <a href="#kartlar" class="btn">Kartlara bax</a>
+  </div>
+
+  <div class="slide">
+    <h1>Kredit imkanlarını kəşf edin</h1>
+    <p>Aylıq ödənişinizi kalkulyatorla hesablayın.</p>
+    <a href="#kredit-kalkulyator" class="btn">Hesabla</a>
+  </div>
+
+  <div class="slide">
+    <h1>Gələcəyiniz üçün yığım</h1>
+    <p>Əmanət kalkulyatoru ilə nümunə gəliri hesablayın.</p>
+    <a href="#emanet-kalkulyator" class="btn">Ətraflı</a>
+  </div>
+
+  <div class="slider-controls">
+    <button type="button" onclick="changeSlide(-1)">❮</button>
+    <span id="slideCounter">1 / 3</span>
+    <button type="button" onclick="changeSlide(1)">❯</button>
+  </div>
+</div>
+
+<style>
+.hero-slider {
+  position: relative;
+  min-height: 340px;
+  padding: 65px 8%;
+  background: linear-gradient(115deg, #0756a5, #19a6e8);
+  color: white;
+}
+.slide { display: none; max-width: 650px; }
+.slide.active { display: block; }
+.slide h1 { font-size: clamp(28px, 4vw, 44px); }
+.slide p { line-height: 1.7; }
+.slide .btn { background: white; color: #0756a5; }
+.slider-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 30px;
+}
+.slider-controls button {
+  width: auto;
+  margin: 0;
+  background: #ffffff30;
+  border: 1px solid #ffffff60;
+}
+</style>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(index) {
+  slides[currentSlide].classList.remove("active");
+  currentSlide = (index + slides.length) % slides.length;
+  slides[currentSlide].classList.add("active");
+  document.getElementById("slideCounter").textContent =
+    (currentSlide + 1) + " / " + slides.length;
+}
+
+function changeSlide(direction) {
+  showSlide(currentSlide + direction);
+}
+
+setInterval(() => changeSlide(1), 5000);
+</script>
+
+<section id="xidmetler">
+  <h2>Xidmətlərimiz</h2>
+  <div class="cards">
+    <div class="card" id="kartlar">
+      <h3>Bank kartları</h3>
+      <p>Gündəlik ödənişlər üçün kart xidmətləri.</p>
+      <a href="#kartlar">Ətraflı bax</a>
+    </div>
+    <div class="card" id="kreditler">
+      <h3>Kreditlər</h3>
+      <p>Müxtəlif məqsədlər üçün kredit məhsulları.</p>
+      <a href="#kreditler">Ətraflı bax</a>
+    </div>
+    <div class="card" id="emanetler">
+      <h3>Əmanətlər</h3>
+      <p>Yığım və əmanət imkanları haqqında məlumat.</p>
+      <a href="#emanetler">Ətraflı bax</a>
+    </div>
+  </div>
+</section>
+
+<section id="haqqimizda">
+  <h2>Haqqımızda</h2>
+  <p>Bu səhifə veb-dizayn və kibertəhlükəsizlik
+  dərsi üçün yaradılmış nümayiş layihəsidir.</p>
+</section>
+
+<section id="valyuta">
+  <h2>Valyuta konvertoru</h2>
+  <p>Nümunə məzənnələr — real əməliyyat deyil.</p>
+
+  <input id="amount" type="number"
+         value="100" min="0" step="0.01">
+
+  <select id="from">
+    <option>AZN</option>
+    <option>USD</option>
+    <option>EUR</option>
+  </select>
+
+  <span>→</span>
+
+  <select id="to">
+    <option>USD</option>
+    <option>AZN</option>
+    <option>EUR</option>
+  </select>
+
+  <button onclick="convert()">Hesabla</button>
+  <h3 id="result"></h3>
+</section>
+
+<script>
+const rates = {
+  AZN: 1,
+  USD: 1.70,
+  EUR: 1.90
+};
+
+function convert() {
+  const amount = Number(
+    document.getElementById("amount").value
+  );
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+
+  if (!Number.isFinite(amount) || amount < 0) {
+    document.getElementById("result").textContent =
+      t("Düzgün məbləğ daxil edin.","Enter a valid amount.","Введите корректную сумму.");
+    return;
+  }
+
+  const result = amount * rates[from] / rates[to];
+
+  document.getElementById("result").textContent =
+    result.toFixed(2) + " " + to;
+}
+
+convert();
+</script>
+
+<section id="kredit-kalkulyator">
+  <h2>Kredit kalkulyatoru</h2>
+  <p>Nümunə hesablamadır, ABB-nin kredit təklifi deyil.</p>
+
+  <div class="card">
+    <label for="loanAmount">Kredit məbləği (AZN)</label>
+    <input id="loanAmount" type="number"
+           value="5000" min="100" max="100000">
+
+    <label for="loanMonths">Müddət (ay)</label>
+    <select id="loanMonths">
+      <option value="6">6 ay</option>
+      <option value="12">12 ay</option>
+      <option value="24" selected>24 ay</option>
+      <option value="36">36 ay</option>
+      <option value="48">48 ay</option>
+    </select>
+
+    <label for="loanRate">İllik faiz (%)</label>
+    <input id="loanRate" type="number"
+           value="12" min="0" max="100" step="0.1">
+
+    <button onclick="calculateLoan()">
+      Aylıq ödənişi hesabla
+    </button>
+
+    <h3 id="loanResult"></h3>
+    <p id="loanTotal"></p>
+  </div>
+</section>
+
+<script>
+function calculateLoan() {
+  const amount = Number(document.getElementById("loanAmount").value);
+  const months = Number(document.getElementById("loanMonths").value);
+  const annual = Number(document.getElementById("loanRate").value);
+
+  const output = document.getElementById("loanResult");
+  const totalOutput = document.getElementById("loanTotal");
+
+  if (amount < 100 || amount > 100000 ||
+      !Number.isFinite(amount) ||
+      !Number.isFinite(annual) ||
+      annual < 0 || annual > 100) {
+    output.textContent = t("Düzgün məlumat daxil edin.","Enter valid information.","Введите корректные данные.");
+    totalOutput.textContent = "";
+    return;
+  }
+
+  const r = annual / 100 / 12;
+  const payment = r === 0
+    ? amount / months
+    : amount * r / (1 - Math.pow(1 + r, -months));
+
+  output.textContent =
+    t("Aylıq ödəniş: ","Monthly payment: ","Ежемесячный платёж: ") + payment.toFixed(2) + " AZN";
+
+  totalOutput.textContent =
+    t("Ümumi ödəniş: ","Total payment: ","Общая сумма выплат: ") +
+    (payment * months).toFixed(2) + " AZN";
+}
+
+calculateLoan();
+</script>
+
+<section id="emanet-kalkulyator">
+  <h2>Əmanət kalkulyatoru</h2>
+  <p>Nümunə faiz hesablamasıdır.</p>
+
+  <div class="card">
+    <label for="depositAmount">Əmanət məbləği (AZN)</label>
+    <input id="depositAmount" type="number"
+           value="10000" min="1">
+
+    <label for="depositMonths">Müddət (ay)</label>
+    <select id="depositMonths">
+      <option value="6">6 ay</option>
+      <option value="12" selected>12 ay</option>
+      <option value="24">24 ay</option>
+      <option value="36">36 ay</option>
+    </select>
+
+    <label for="depositRate">İllik faiz (%)</label>
+    <input id="depositRate" type="number"
+           value="8" min="0" max="100" step="0.1">
+
+    <button onclick="calculateDeposit()">
+      Gəliri hesabla
+    </button>
+
+    <h3 id="depositResult"></h3>
+  </div>
+</section>
+
+<script>
+function calculateDeposit() {
+  const amount = Number(
+    document.getElementById("depositAmount").value
+  );
+  const months = Number(
+    document.getElementById("depositMonths").value
+  );
+  const annual = Number(
+    document.getElementById("depositRate").value
+  );
+
+  const output = document.getElementById("depositResult");
+
+  if (!Number.isFinite(amount) || amount <= 0 ||
+      !Number.isFinite(annual) ||
+      annual < 0 || annual > 100) {
+    output.textContent = t("Düzgün məlumat daxil edin.","Enter valid information.","Введите корректные данные.");
+    return;
+  }
+
+  const interest = amount * (annual / 100) * months / 12;
+
+  output.textContent =
+    t("Təxmini gəlir: ","Estimated return: ","Примерный доход: ") + interest.toFixed(2) +
+    t(" AZN | Yekun: "," AZN | Total: "," AZN | Итого: ") +
+    (amount + interest).toFixed(2) + " AZN";
+}
+
+calculateDeposit();
+</script>
+
+<section id="quickServices">
+  <h2>Sürətli xidmətlər</h2>
+
+  <details class="service-menu">
+    <summary>Kart xidmətləri</summary>
+    <p>Debet kartları və gündəlik ödənişlər.</p>
+    <a href="#kartlar">Kartlara bax →</a>
+  </details>
+
+  <details class="service-menu">
+    <summary>Kredit xidmətləri</summary>
+    <p>Nümunə kredit hesablaması.</p>
+    <a href="#kredit-kalkulyator">Krediti hesabla →</a>
+  </details>
+
+  <details class="service-menu">
+    <summary>Əmanət xidmətləri</summary>
+    <p>Nümunə əmanət gəliri hesablaması.</p>
+    <a href="#emanet-kalkulyator">Əmanəti hesabla →</a>
+  </details>
+</section>
+
+<style>
+.service-menu {
+  background: white;
+  border: 1px solid #dce6f2;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 12px 0;
+}
+.service-menu summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #0756a5;
+}
+.service-menu a {
+  color: #0875c9;
+  font-weight: bold;
+}
+</style>
+
+<section id="bank-kartlari">
+  <h2>Bank kartları</h2>
+  <p>Gündəlik alış-veriş və ödənişlər üçün nümunə kartlar.</p>
+
+  <div class="bank-card-grid">
+    <article class="bank-product">
+      <div class="visual-card blue-card">
+        <span>Bank Demo</span>
+        <strong>●● ●●</strong>
+        <small>DEBET</small>
+      </div>
+      <h3>Classic kart</h3>
+      <p>Gündəlik ödənişlər üçün.</p>
+      <button onclick="showCardInfo('Classic')">Ətraflı bax</button>
+    </article>
+
+    <article class="bank-product">
+      <div class="visual-card dark-card">
+        <span>Bank Demo</span>
+        <strong>●● ●●</strong>
+        <small>PREMIUM</small>
+      </div>
+      <h3>Premium kart</h3>
+      <p>Əlavə imkanlarla nümunə kart.</p>
+      <button onclick="showCardInfo('Premium')">Ətraflı bax</button>
+    </article>
+
+    <article class="bank-product">
+      <div class="visual-card light-card">
+        <span>Bank Demo</span>
+        <strong>●● ●●</strong>
+        <small>DIGITAL</small>
+      </div>
+      <h3>Digital kart</h3>
+      <p>Rəqəmsal ödənişlər üçün.</p>
+      <button onclick="showCardInfo('Digital')">Ətraflı bax</button>
+    </article>
+  </div>
+
+  <p id="cardInfo" aria-live="polite"></p>
+</section>
+
+<style>
+.bank-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.bank-product {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px #16375a12;
+}
+.visual-card {
+  aspect-ratio: 1.6;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  box-shadow: 0 10px 20px #00000020;
+}
+.visual-card strong { font-size: 25px; }
+.blue-card {
+  background: linear-gradient(125deg, #0764b5, #21b6e9);
+}
+.dark-card {
+  background: linear-gradient(125deg, #121b30, #4a5875);
+}
+.light-card {
+  background: linear-gradient(125deg, #7189c7, #b2bce8);
+}
+.bank-product button { width: 100%; }
+#cardInfo { font-weight: bold; color: #0756a5; }
+
+@media (max-width: 800px) {
+  .bank-card-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+function showCardInfo(type) {
+  const descriptions = {
+    Classic: "Classic kart: gündəlik alış-veriş və ödənişlər.",
+    Premium: "Premium kart: əlavə xidmətləri nümayiş etdirən maket.",
+    Digital: "Digital kart: rəqəmsal kart simulyasiyası."
+  };
+
+  document.getElementById("cardInfo").textContent =
+    ({az: descriptions[type], en: {Classic:"Classic card: everyday purchases and payments.",Premium:"Premium card: sample with additional services.",Digital:"Digital card: a virtual card demo."}[type],ru:{Classic:"Классическая карта: ежедневные покупки и платежи.",Premium:"Премиальная карта: макет с дополнительными услугами.",Digital:"Цифровая карта: демонстрация виртуальной карты."}[type]})[document.getElementById("languageSelect").value] || t("Məlumat tapılmadı.","No information found.","Информация не найдена.");
+
+  document.getElementById("cardInfo")
+    .scrollIntoView({ behavior: "smooth", block: "center" });
+}
+</script>
+
+<style>
+html { scroll-behavior: smooth; }
+
+input, select {
+  padding: 12px;
+  margin: 8px 5px 8px 0;
+  border: 1px solid #d4dfeb;
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+button:hover, .btn:hover {
+  filter: brightness(1.08);
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 18px 5%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    width: 100%;
+    gap: 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 10px;
+  }
+
+  nav a { white-space: nowrap; }
+
+  .topbar {
+    padding: 12px 5%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  section { padding: 30px 5%; }
+
+  .hero-slider {
+    padding: 45px 5%;
+    min-height: 320px;
+  }
+
+  .card, .bank-product { padding: 20px; }
+
+  .search-area { padding: 16px 5%; }
+}
+</style>
+
+<section id="language-settings">
+  <h2 id="languageTitle">Dil seçimi</h2>
+
+  <select id="languageSelect" onchange="changeLanguage()">
+    <option value="az">Azərbaycan dili</option>
+    <option value="en">English</option>
+    <option value="ru">Русский</option>
+  </select>
+
+  <p id="languageMessage">
+    Saytın dili: Azərbaycan dili
+  </p>
+</section>
+
+<script>
+const i18n = {
+  "TƏLİM MAKETİ — Bu səhifə ABB-nin rəsmi saytı deyil.": {
+    "en": "TRAINING DEMO — This is not ABB’s official website.",
+    "ru": "УЧЕБНЫЙ МАКЕТ — Это не официальный сайт ABB."
+  },
+  "Fərdi müştərilər | Biznes müştəriləri": {
+    "en": "Personal customers | Business customers",
+    "ru": "Частным лицам | Бизнесу"
+  },
+  "Kartlar": {
+    "en": "Cards",
+    "ru": "Карты"
+  },
+  "Kreditlər": {
+    "en": "Loans",
+    "ru": "Кредиты"
+  },
+  "Əmanətlər": {
+    "en": "Deposits",
+    "ru": "Вклады"
+  },
+  "Valyuta": {
+    "en": "Currency",
+    "ru": "Валюта"
+  },
+  "Kredit kalkulyatoru": {
+    "en": "Loan calculator",
+    "ru": "Кредитный калькулятор"
+  },
+  "Əmanət kalkulyatoru": {
+    "en": "Deposit calculator",
+    "ru": "Калькулятор вкладов"
+  },
+  "Xidmətlər": {
+    "en": "Services",
+    "ru": "Услуги"
+  },
+  "Axtar": {
+    "en": "Search",
+    "ru": "Поиск"
+  },
+  "Bank xidmətləri bir ünvanda": {
+    "en": "Banking services in one place",
+    "ru": "Банковские услуги в одном месте"
+  },
+  "Kartlar, kreditlər və gündəlik maliyyə xidmətləri.": {
+    "en": "Cards, loans and everyday financial services.",
+    "ru": "Карты, кредиты и повседневные финансовые услуги."
+  },
+  "Kartlara bax": {
+    "en": "Explore cards",
+    "ru": "Посмотреть карты"
+  },
+  "Kredit imkanlarını kəşf edin": {
+    "en": "Explore loan options",
+    "ru": "Узнайте о кредитных возможностях"
+  },
+  "Aylıq ödənişinizi kalkulyatorla hesablayın.": {
+    "en": "Estimate your monthly payment with our calculator.",
+    "ru": "Рассчитайте ежемесячный платёж с помощью калькулятора."
+  },
+  "Hesabla": {
+    "en": "Calculate",
+    "ru": "Рассчитать"
+  },
+  "Gələcəyiniz üçün yığım": {
+    "en": "Save for your future",
+    "ru": "Копите на будущее"
+  },
+  "Əmanət kalkulyatoru ilə nümunə gəliri hesablayın.": {
+    "en": "Estimate returns with the deposit calculator.",
+    "ru": "Рассчитайте примерный доход по вкладу."
+  },
+  "Ətraflı": {
+    "en": "Learn more",
+    "ru": "Подробнее"
+  },
+  "Xidmətlərimiz": {
+    "en": "Our services",
+    "ru": "Наши услуги"
+  },
+  "Bank kartları": {
+    "en": "Bank cards",
+    "ru": "Банковские карты"
+  },
+  "Gündəlik ödənişlər üçün kart xidmətləri.": {
+    "en": "Card services for everyday payments.",
+    "ru": "Карточные услуги для ежедневных платежей."
+  },
+  "Ətraflı bax": {
+    "en": "Learn more",
+    "ru": "Подробнее"
+  },
+  "Müxtəlif məqsədlər üçün kredit məhsulları.": {
+    "en": "Loan products for different needs.",
+    "ru": "Кредитные продукты для разных целей."
+  },
+  "Yığım və əmanət imkanları haqqında məlumat.": {
+    "en": "Information about savings and deposits.",
+    "ru": "Информация о накоплениях и вкладах."
+  },
+  "Haqqımızda": {
+    "en": "About this project",
+    "ru": "О проекте"
+  },
+  "Bu səhifə veb-dizayn və kibertəhlükəsizlik dərsi üçün yaradılmış nümayiş layihəsidir.": {
+    "en": "This is a demonstration project for web design and cybersecurity classes.",
+    "ru": "Это демонстрационный проект для занятий по веб-дизайну и кибербезопасности."
+  },
+  "Bank interfeysi üzrə təlim layihəsi. Real bank xidmətləri göstərilmir.": {
+    "en": "Bank interface training project. No real banking services are provided.",
+    "ru": "Учебный проект банковского интерфейса. Реальные банковские услуги не предоставляются."
+  },
+  "Valyuta konvertoru": {
+    "en": "Currency converter",
+    "ru": "Конвертер валют"
+  },
+  "Nümunə məzənnələr — real əməliyyat deyil.": {
+    "en": "Sample exchange rates — not a real transaction.",
+    "ru": "Примерные курсы валют — не реальная операция."
+  },
+  "Nümunə hesablamadır, ABB-nin kredit təklifi deyil.": {
+    "en": "Illustrative calculation, not a loan offer from ABB.",
+    "ru": "Примерный расчёт, не кредитное предложение ABB."
+  },
+  "Kredit məbləği (AZN)": {
+    "en": "Loan amount (AZN)",
+    "ru": "Сумма кредита (AZN)"
+  },
+  "Müddət (ay)": {
+    "en": "Term (months)",
+    "ru": "Срок (месяцы)"
+  },
+  "İllik faiz (%)": {
+    "en": "Annual interest (%)",
+    "ru": "Годовая ставка (%)"
+  },
+  "Aylıq ödənişi hesabla": {
+    "en": "Calculate monthly payment",
+    "ru": "Рассчитать ежемесячный платёж"
+  },
+  "Nümunə faiz hesablamasıdır.": {
+    "en": "Illustrative interest calculation.",
+    "ru": "Примерный расчёт процентов."
+  },
+  "Əmanət məbləği (AZN)": {
+    "en": "Deposit amount (AZN)",
+    "ru": "Сумма вклада (AZN)"
+  },
+  "Gəliri hesabla": {
+    "en": "Calculate return",
+    "ru": "Рассчитать доход"
+  },
+  "Sürətli xidmətlər": {
+    "en": "Quick services",
+    "ru": "Быстрые услуги"
+  },
+  "Kart xidmətləri": {
+    "en": "Card services",
+    "ru": "Карточные услуги"
+  },
+  "Debet kartları və gündəlik ödənişlər.": {
+    "en": "Debit cards and everyday payments.",
+    "ru": "Дебетовые карты и ежедневные платежи."
+  },
+  "Kartlara bax →": {
+    "en": "Explore cards →",
+    "ru": "Посмотреть карты →"
+  },
+  "Kredit xidmətləri": {
+    "en": "Loan services",
+    "ru": "Кредитные услуги"
+  },
+  "Nümunə kredit hesablaması.": {
+    "en": "Sample loan calculation.",
+    "ru": "Пример расчёта кредита."
+  },
+  "Krediti hesabla →": {
+    "en": "Calculate loan →",
+    "ru": "Рассчитать кредит →"
+  },
+  "Əmanət xidmətləri": {
+    "en": "Deposit services",
+    "ru": "Услуги по вкладам"
+  },
+  "Nümunə əmanət gəliri hesablaması.": {
+    "en": "Sample deposit return calculation.",
+    "ru": "Пример расчёта дохода по вкладу."
+  },
+  "Əmanəti hesabla →": {
+    "en": "Calculate deposit →",
+    "ru": "Рассчитать вклад →"
+  },
+  "Gündəlik alış-veriş və ödənişlər üçün nümunə kartlar.": {
+    "en": "Sample cards for everyday purchases and payments.",
+    "ru": "Примеры карт для повседневных покупок и платежей."
+  },
+  "Classic kart": {
+    "en": "Classic card",
+    "ru": "Классическая карта"
+  },
+  "Gündəlik ödənişlər üçün.": {
+    "en": "For everyday payments.",
+    "ru": "Для ежедневных платежей."
+  },
+  "Premium kart": {
+    "en": "Premium card",
+    "ru": "Премиальная карта"
+  },
+  "Əlavə imkanlarla nümunə kart.": {
+    "en": "A sample card with additional features.",
+    "ru": "Пример карты с дополнительными возможностями."
+  },
+  "Digital kart": {
+    "en": "Digital card",
+    "ru": "Цифровая карта"
+  },
+  "Rəqəmsal ödənişlər üçün.": {
+    "en": "For digital payments.",
+    "ru": "Для цифровых платежей."
+  },
+  "Dil seçimi": {
+    "en": "Language selection",
+    "ru": "Выбор языка"
+  },
+  "Saytın dili: Azərbaycan dili": {
+    "en": "Website language: English",
+    "ru": "Язык сайта: Русский"
+  },
+  "6 ay": {
+    "en": "6 months",
+    "ru": "6 месяцев"
+  },
+  "12 ay": {
+    "en": "12 months",
+    "ru": "12 месяцев"
+  },
+  "24 ay": {
+    "en": "24 months",
+    "ru": "24 месяца"
+  },
+  "36 ay": {
+    "en": "36 months",
+    "ru": "36 месяцев"
+  },
+  "Nümunə filial siyahısıdır; xəritə keçidləri axtarış açır, dəqiq ünvan təsdiqi deyil.": {"en":"Illustrative branch list; map links open a search, not a verified address.","ru":"Примерный список отделений; ссылки открывают поиск на карте, а не подтверждённый адрес."},
+  "Filial axtarışı": {"en": "Branch finder", "ru": "Поиск отделений"},
+  "Filialların adını və ya şəhərini axtarın.": {"en": "Search by branch name or city.", "ru": "Поиск по названию отделения или городу."},
+  "Tez-tez verilən suallar": {"en": "Frequently asked questions", "ru": "Часто задаваемые вопросы"},
+  "Bank xidmətləri haqqında ümumi məlumatlar.": {"en": "General information about banking services.", "ru": "Общая информация о банковских услугах."},
+  "Debet kartı nədir?": {"en": "What is a debit card?", "ru": "Что такое дебетовая карта?"},
+  "Debet kartı hesabınızdakı vəsaitdən istifadə etməyə imkan verən ödəniş kartıdır.": {"en": "A debit card lets you pay using funds in your account.", "ru": "Дебетовая карта позволяет платить средствами со счёта."},
+  "Kredit kalkulyatoru necə işləyir?": {"en": "How does the loan calculator work?", "ru": "Как работает кредитный калькулятор?"},
+  "Kredit məbləğini, müddəti və illik faiz dərəcəsini daxil etdikdə təxmini aylıq ödəniş hesablanır.": {"en": "Enter the amount, term and annual interest rate to estimate monthly payments.", "ru": "Введите сумму, срок и годовую ставку для расчёта примерного ежемесячного платежа."},
+  "Valyuta konvertoru nə üçündür?": {"en": "What is the currency converter for?", "ru": "Для чего нужен конвертер валют?"},
+  "Müxtəlif valyutalar arasında nümunə məzənnələrlə hesablama aparır. Real bank məzənnəsi deyil.": {"en": "It converts using illustrative rates, not actual bank exchange rates.", "ru": "Конвертация по учебным курсам, а не по реальным банковским."},
+  "Filialları necə tapa bilərəm?": {"en": "How can I find branches?", "ru": "Как найти отделения?"},
+  "Filial axtarışı bölməsində şəhər və ya filial adını yazıb xəritə keçidindən istifadə edə bilərsiniz.": {"en": "Search by city or branch name and open the map link.", "ru": "Введите город или название отделения и откройте ссылку на карту."},
+  "Qeyri-rəsmi təlim layihəsi. ABB ilə əlaqəli deyil. Real bank xidmətləri göstərilmir.": {"en": "Unofficial training project. Not affiliated with ABB. No real banking services.", "ru": "Неофициальный учебный проект. Не связан с ABB. Реальные банковские услуги не предоставляются."},
+  "48 ay": {
+    "en": "48 months",
+    "ru": "48 месяцев"
+  }
+};
+const originalNodes = [];
+function normalizeText(text) { return text.replace(/\s+/g, ' ').trim(); }
+function initTranslations() {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (['SCRIPT','STYLE'].includes(node.parentElement?.tagName)) continue;
+    const original = normalizeText(node.nodeValue);
+    if (Object.prototype.hasOwnProperty.call(i18n, original)) {
+      originalNodes.push({node, original});
+    }
+  }
+}
+function changeLanguage() {
+  const lang = document.getElementById('languageSelect').value;
+  document.documentElement.lang = lang;
+  for (const item of originalNodes) {
+    const translated = lang === 'az' ? item.original : i18n[item.original][lang];
+    item.node.nodeValue = item.node.nodeValue.replace(/\S(?:[\s\S]*\S)?/, translated);
+  }
+  const placeholders = {
+    az: 'Saytda axtar...', en: 'Search this site...', ru: 'Поиск по сайту...'
+  };
+  document.getElementById('siteSearch').placeholder = placeholders[lang];
+  document.getElementById('siteSearch').setAttribute('aria-label', placeholders[lang]);
+  document.title = {az:'Bank saytı — Təlim maketi', en:'Bank website — Training demo', ru:'Банковский сайт — Учебный макет'}[lang];
+  // Refresh calculated output labels in the selected language.
+  convert(); calculateLoan(); calculateDeposit();
+  document.getElementById('cardInfo').textContent = '';
+  document.getElementById('searchMessage').textContent = '';
+  filterBranches();
+  updateThemeButton();
+}
+function t(az,en,ru) {
+  const lang = document.getElementById('languageSelect')?.value || 'az';
+  return ({az,en,ru})[lang];
+}
+</script>
+
+
+
+
+<section id="filiallar">
+  <h2>Filial axtarışı</h2>
+  <p>Filialların adını və ya şəhərini axtarın.</p>
+
+  <input
+    id="branchSearch"
+    type="search"
+    placeholder="Filial və ya şəhər..."
+    oninput="filterBranches()"
+  >
+
+  <p class="branch-note">Nümunə filial siyahısıdır; xəritə keçidləri axtarış açır, dəqiq ünvan təsdiqi deyil.</p>
+  <div id="branchResults"></div>
+</section>
+
+<style>
+#branchResults {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.branch-card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px #00000012;
+}
+
+.branch-card h3 {
+  color: #0875c9;
+}
+</style>
+
+<script>
+const branches = [
+  { name: "Mərkəz filialı", city: "Bakı", en: "Central branch", ru: "Центральное отделение", cityEn: "Baku", cityRu: "Баку" },
+  { name: "Səbail filialı", city: "Bakı", en: "Sabail branch", ru: "Сабаильское отделение", cityEn: "Baku", cityRu: "Баку" },
+  { name: "Yasamal filialı", city: "Bakı", en: "Yasamal branch", ru: "Ясамальское отделение", cityEn: "Baku", cityRu: "Баку" },
+  { name: "Gəncə filialı", city: "Gəncə", en: "Ganja branch", ru: "Гянджинское отделение", cityEn: "Ganja", cityRu: "Гянджа" },
+  { name: "Sumqayıt filialı", city: "Sumqayıt", en: "Sumgayit branch", ru: "Сумгаитское отделение", cityEn: "Sumgayit", cityRu: "Сумгаит" }
+];
+
+function filterBranches() {
+  const query = document.getElementById("branchSearch")
+    .value.trim().toLocaleLowerCase("az");
+
+  const container = document.getElementById("branchResults");
+  container.replaceChildren();
+
+  const matches = branches
+    .filter(branch =>
+      (branch.name + " " + branch.city + " " + branch.en + " " + branch.ru + " " + branch.cityEn + " " + branch.cityRu)
+        .toLocaleLowerCase("az")
+        .includes(query)
+    );
+  if (!matches.length) {
+    container.textContent = t("Filial tapılmadı.", "No branches found.", "Отделения не найдены.");
+  }
+  matches.forEach(branch => {
+      const card = document.createElement("div");
+      card.className = "branch-card";
+
+      const title = document.createElement("h3");
+      title.textContent = ({az: branch.name, en: branch.en, ru: branch.ru})[document.getElementById("languageSelect").value];
+
+      const city = document.createElement("p");
+      city.textContent = ({az: branch.city, en: branch.cityEn, ru: branch.cityRu})[document.getElementById("languageSelect").value];
+
+      
+const mapButton = document.createElement("button");
+mapButton.textContent = t("📍 Xəritədə göstər", "📍 Show on map", "📍 Показать на карте");
+
+mapButton.style.marginTop = "12px";
+
+mapButton.onclick = function() {
+  const location = branch.name + ", " + branch.city + ", Azərbaycan";
+
+  const mapUrl =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(location);
+
+  window.open(mapUrl, "_blank", "noopener,noreferrer");
+};
+
+card.append(title, city, mapButton);
+
+      container.appendChild(card);
+    });
+}
+
+filterBranches();
+</script>
+
+<style>
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brand-area .logo {
+  color: #0875c9;
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.brand-label {
+  background: #e8f3fc;
+  color: #0756a5;
+  padding: 7px 11px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.card,
+.bank-product,
+.branch-card {
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.card:hover,
+.bank-product:hover,
+.branch-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px #16375a25;
+}
+
+button,
+.btn {
+  transition: transform 0.2s ease,
+              filter 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .bank-product, .branch-card,
+  button, .btn {
+    transition: none;
+  }
+}
+</style>
+<style>
+.bank-logo {
+  width: 105px;
+  height: auto;
+  object-fit: contain;
+}
+</style>
+
+<section id="faq" class="faq-section">
+  <h2>Tez-tez verilən suallar</h2>
+  <p>Bank xidmətləri haqqında ümumi məlumatlar.</p>
+
+  <details class="faq-item">
+    <summary>Debet kartı nədir?</summary>
+    <p>Debet kartı hesabınızdakı vəsaitdən istifadə etməyə imkan verən ödəniş kartıdır.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Kredit kalkulyatoru necə işləyir?</summary>
+    <p>Kredit məbləğini, müddəti və illik faiz dərəcəsini daxil etdikdə təxmini aylıq ödəniş hesablanır.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Valyuta konvertoru nə üçündür?</summary>
+    <p>Müxtəlif valyutalar arasında nümunə məzənnələrlə hesablama aparır. Real bank məzənnəsi deyil.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Filialları necə tapa bilərəm?</summary>
+    <p>Filial axtarışı bölməsində şəhər və ya filial adını yazıb xəritə keçidindən istifadə edə bilərsiniz.</p>
+  </details>
+</section>
+
+<style>
+.faq-section {
+  background: #f5f8fc;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid #dce6f2;
+  border-radius: 12px;
+  padding: 19px 22px;
+  margin: 12px 0;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #0756a5;
+}
+
+.faq-item[open] {
+  box-shadow: 0 6px 18px rgba(10, 55, 100, 0.08);
+}
+
+.faq-item p {
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.faq-item summary::marker {
+  color: #0875c9;
+}
+</style>
+<style>
+.demo-disclaimer {
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-top: 20px;
+}
+</style>
+<footer>
+  <p class="demo-disclaimer">
+  Qeyri-rəsmi təlim layihəsi. ABB ilə əlaqəli deyil.
+  Real bank xidmətləri göstərilmir.
+</p>
+</footer>
+
+<style>
+footer {
+  background: #142a49;
+  color: #ffffff;
+  padding: 40px 8%;
+  margin-top: 30px;
+  border-top: 4px solid #0875c9;
+}
+
+footer p {
+  line-height: 1.7;
+}
+
+.demo-disclaimer {
+  font-size: 12px;
+  color: #d3deeb;
+  margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 30px 5%;
+  }
+}
+</style>
+
+
+<style>
+/* Təkmilləşdirilmiş mobil görünüş və qaranlıq rejim */
+header { flex-wrap: wrap; }
+header nav { flex: 1; justify-content: center; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #f4a622; outline-offset: 3px; }
+#themeToggle { background: #213b5e; white-space: nowrap; }
+body.dark-mode { background: #101a2b; color: #e6edf7; }
+body.dark-mode .topbar, body.dark-mode header, body.dark-mode .search-area,
+body.dark-mode .card, body.dark-mode .bank-product, body.dark-mode .branch-card,
+body.dark-mode .faq-item, body.dark-mode .service-menu, body.dark-mode .faq-section { background: #1b2a40; color: #e6edf7; }
+body.dark-mode section h2, body.dark-mode .card h3, body.dark-mode .branch-card h3,
+body.dark-mode .faq-item summary, body.dark-mode .service-menu summary,
+body.dark-mode nav a { color: #a7d9ff; }
+body.dark-mode input, body.dark-mode select { background: #152239; color: #fff; border-color: #49617f; }
+body.dark-mode .notice { background: #40381d; color: #fff0bb; }
+@media (max-width: 768px) { header nav { justify-content: flex-start; } #themeToggle { padding: 10px 14px; } }
+</style>
+<script>
+function updateThemeButton() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const dark = document.body.classList.contains('dark-mode');
+  btn.setAttribute('aria-pressed', String(dark));
+  btn.textContent = dark ? t('☀️ Açıq rejim','☀️ Light mode','☀️ Светлая тема') : t('🌙 Qaranlıq rejim','🌙 Dark mode','🌙 Тёмная тема');
+}
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  updateThemeButton();
+}
+initTranslations();
+updateThemeButton();
+</script>
+
+<!-- Demo bildiriş sistemi -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<button type="button" class="demo-notify-btn"
+        onclick="showToast('Bu, təlim layihəsinin nümunə bildirişidir.')">
+  🔔 Bildirişlər
+</button>
+
+<style>
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-width: 330px;
+  padding: 16px 22px;
+  border-radius: 12px;
+  background: #0756a5;
+  color: #fff;
+  box-shadow: 0 10px 30px #0002;
+  opacity: 0;
+  transform: translateY(-15px);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.demo-notify-btn {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 999;
+  box-shadow: 0 5px 20px #0002;
+}
+
+@media (max-width: 600px) {
+  .toast {
+    left: 15px;
+    right: 15px;
+    max-width: none;
+  }
+  .demo-notify-btn {
+    bottom: 15px;
+    right: 15px;
+  }
+}
+</style>
+
+<script>
+let toastTimer;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4000);
+}
+</script>
+
+</body>
+</html>
